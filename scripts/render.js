@@ -20,7 +20,7 @@ const path = require("path");
   const html = fs.readFileSync(htmlPath, "utf-8");
   await page.setContent(html, { waitUntil: "networkidle0" });
   await page.setViewport({ width: 800, height: 1000 });
-  await page.screenshot({ path: outputPath, fullPage: true });
+  await page.screenshot({ path: outputPath, fullPage: false });
 
   await browser.close();
   console.log("✅ Render complete: output.png");
