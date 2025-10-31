@@ -1,1 +1,37 @@
+name: Render HTML to Image
+
+on:
+  push:
+    paths:
+      - 'html/output.html'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Puppeteer
+        run: |
+          npm init -y
+          npm install puppeteer
+
+      - name: Render HTML to PNG
+        run: |
+          node scripts/render.js
+
+      - name: Commit and push image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add html/output.png
+          git commit -m "Render HTML to PNG" || echo "No changes to commit"
+          git push
 
