@@ -34,4 +34,3 @@ jobs:
           git add html/output.png
           git commit -m "Render HTML to PNG" || echo "No changes to commit"
           git push
-
